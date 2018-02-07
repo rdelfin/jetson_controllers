@@ -48,11 +48,11 @@ void PCA9685::reset () {
 // Sets the frequency of the PWM signal
 // Frequency is ranged between 40 and 1000 Hertz
 void PCA9685::setPWMFrequency ( float frequency ) {
-    printf("Setting PCA9685 PWM frequency to %f Hz\n",frequency) ;
+    ROS_INFO("Setting PCA9685 PWM frequency to %f Hz\n",frequency) ;
     float rangedFrequency = fmin(fmax(frequency,40),1000) ;
     int prescale = (int)(25000000.0f / (4096 * rangedFrequency) - 0.5f) ;
     // For debugging
-    // printf("PCA9685 Prescale: 0x%02X\n",prescale) ;
+    // ROS_INFO("PCA9685 Prescale: 0x%02X\n",prescale) ;
     int oldMode = readByte(PCA9685_MODE1) ;
      int newMode = ( oldMode & 0x7F ) | PCA9685_SLEEP ;
     writeByte(PCA9685_MODE1, newMode) ;
@@ -85,22 +85,22 @@ int PCA9685::readByte(int readRegister)
 {
     int toReturn = i2c_smbus_read_byte_data(kI2CFileDescriptor, readRegister);
     if (toReturn < 0) {
-        printf("PCA9685 Read Byte error: %d",errno) ;
+        ROS_ERROR("PCA9685 Read Byte error: %d",errno) ;
         error = errno ;
         toReturn = -1 ;
     }
     // For debugging
-    // printf("Device 0x%02X returned 0x%02X from register 0x%02X\n", kI2CAddress, toReturn, readRegister);
+    // ROS_INFO("Device 0x%02X returned 0x%02X from register 0x%02X\n", kI2CAddress, toReturn, readRegister);
     return toReturn ;
 }
 
 // Write the the given value to the given register
 int PCA9685::writeByte(int writeRegister, int writeValue)
 {   // For debugging:
-    // printf("Wrote: 0x%02X to register 0x%02X \n",writeValue, writeRegister) ;
+    // ROS_INFO("Wrote: 0x%02X to register 0x%02X \n",writeValue, writeRegister) ;
     int toReturn = i2c_smbus_write_byte_data(kI2CFileDescriptor, writeRegister, writeValue);
     if (toReturn < 0) {
-        printf("PCA9685 Write Byte error: %d",errno) ;
+        ROS_ERROR("PCA9685 Write Byte error: %d",errno) ;
         error = errno ;
         toReturn = -1 ;
     }
