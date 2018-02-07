@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>jetson_control_msgs</name>
+  <version>0.0.0</version>
+  <description>The jetson_control_msgs package</description>
+
+  <maintainer email="ricardo.delfin.garcia@gmail.com">Ricardo Delfin Garcia</maintainer>
+  <license>Apache 2.0</license>
+  <author email="ricardo.delfin.garcia@gmail.com">Ricardo Delfin Garcia</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+  <build_export_depend>message_generation</build_export_depend>
+
+  <exec_depend>message_runtime</exec_depend>
+
+  <depend>std_msgs</depend>
+  
+
+  <export>
+  </export>
+</package>
