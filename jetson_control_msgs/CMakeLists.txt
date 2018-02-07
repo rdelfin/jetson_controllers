@@ -6,6 +6,12 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
 )
 
+add_message_files(
+  DIRECTORY msg
+  FILES
+  PCA9685Command.msg
+)
+
 generate_messages(
   DEPENDENCIES
   std_msgs
