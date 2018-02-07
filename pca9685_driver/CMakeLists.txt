@@ -6,11 +6,12 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  jetson_control_msgs
 )
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS roscpp rospy
+  CATKIN_DEPENDS roscpp rospy jetson_control_msgs
 )
 
 ###########

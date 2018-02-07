@@ -15,15 +15,35 @@
 #include <ros/ros.h>
 
 #include <pca9685_driver/JHPWMPCA9685.h>
+#include <jetson_control_msgs/PCA9685Command.h>
 
-int main(int argc, char* argv[]) {
-    PCA9685 pca9685(0x44);
-    if(pca9685.openPCA9685()) {
-        ROS_ERROR("Error openning PCA9685.");
-        exit(1);
+#include <tuple>
+#include <unordered_map>
+
+std::unordered_map<int, PCA9685*> connections;
+
+void command_callback(const jetson_control_msgs::PCA9685Command::ConstPtr& msg) {
+    int addr = msg->serial_address;
+
+    if(connections.count(addr) == 0) {
+        connections[addr] = new PCA9685(addr);
+        if(!connections[addr]->openPCA9685()) {
+            ROS_WARN("Error openning PCA9685 serial port %x. Ignoring...", addr);
+            delete connections[addr];
+            connections.erase(addr);
+            return;
+        }
+        connections[addr]->setPWMFrequency(50);
     }
 
+    connections[addr]->setPWM(msg->pwm_port, 0, msg->value);
+}
+
+int main(int argc, char* argv[]) {
     ros::init(argc, argv, "pca9685_driver");
+
+    ros::NodeHandle nh;
+    ros::Subscriber command_sub = nh.subscribe("pca9685_commands", 100, command_callback);
 
     ros::Rate r(30);
     while(ros::ok()) {
@@ -31,5 +51,8 @@ int main(int argc, char* argv[]) {
         ros::spinOnce();
     }
 
-    pca9685.closePCA9685();
+    for(std::pair<int, PCA9685*> con_pair : connections) {
+        con_pair.second->closePCA9685();
+        delete con_pair.second;
+    }
 }
