@@ -1,4 +1,5 @@
 #include <pca9685_driver/JHPWMPCA9685.h>
+#include <ros/ros.h>
 #include <math.h>
 
  PCA9685::PCA9685(int address) {
