@@ -14,6 +14,7 @@
   <depend>pca9685_driver</depend>
   <depend>roscpp</depend>
   <depend>rospy</depend>
+  <depend>sensor_msgs</depend>
 
   <export>
 

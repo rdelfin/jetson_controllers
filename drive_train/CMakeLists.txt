@@ -5,6 +5,7 @@ add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
+  sensor_msgs
   jetson_control_msgs
   pca9685_driver
   roscpp
@@ -13,7 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS geometry_msgs jetson_control_msgs pca9685_driver roscpp rospy
+  CATKIN_DEPENDS geometry_msgs sensor_msgs jetson_control_msgs pca9685_driver roscpp rospy
 )
 
 ###########
@@ -27,5 +28,11 @@ include_directories(
 add_executable(drive_train_controller src/drive_train_controller.cpp)
 add_dependencies(drive_train_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(drive_train_controller
+  ${catkin_LIBRARIES}
+)
+
+add_executable(joystick_converter src/joystick_converter.cpp)
+add_dependencies(joystick_converter ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(joystick_converter
   ${catkin_LIBRARIES}
 )
