@@ -6,6 +6,7 @@
 #define STEERING_PWM_PORT 0
 #define SPEED_PWM_PORT    1
 
+#define MIN_PWM  204
 #define ZERO_PWM 307
 #define MAX_PWM  409
 
@@ -15,7 +16,7 @@ ros::Publisher pca9685_publisher;
 
 void cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg) {
     ROS_INFO("RECEIVED MESSAGE");
-    double lin = (MAX_PWM-ZERO_PWM)*BOUNDS(msg->linear.x, 0.0, 1.0) + ZERO_PWM;
+    double lin = (MAX_PWM-ZERO_PWM)*BOUNDS(msg->linear.x, -1.0, 1.0) + ZERO_PWM;
     double rot = (MAX_PWM-ZERO_PWM)*BOUNDS(-msg->angular.z,-1.0, 1.0) + ZERO_PWM; // This one's flipped for whatever reason
 
     jetson_control_msgs::PCA9685Command steering_msg, speed_msg;
