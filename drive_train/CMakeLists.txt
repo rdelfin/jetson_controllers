@@ -10,11 +10,13 @@ find_package(catkin REQUIRED COMPONENTS
   pca9685_driver
   roscpp
   rospy
+  tf2
+  tf2_ros
 )
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS geometry_msgs sensor_msgs jetson_control_msgs pca9685_driver roscpp rospy
+  CATKIN_DEPENDS geometry_msgs sensor_msgs jetson_control_msgs pca9685_driver roscpp rospy tf2 tf2_ros
 )
 
 ###########
@@ -34,5 +36,11 @@ target_link_libraries(drive_train_controller
 add_executable(joystick_converter src/joystick_converter.cpp)
 add_dependencies(joystick_converter ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(joystick_converter
+  ${catkin_LIBRARIES}
+)
+
+add_executable(base_laser_tf_node src/base_laser_tf_node.cpp)
+add_dependencies(base_laser_tf_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(base_laser_tf_node
   ${catkin_LIBRARIES}
 )
