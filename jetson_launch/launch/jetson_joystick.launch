@@ -1,0 +1,9 @@
+<launch>
+    <arg name="joy_device" default="/dev/input/js1" />
+    <arg name="joy_deadzone" default="0.00" />
+
+    <node name="joystick" pkg="joy" type="joy_node">
+        <param name="dev" type="str" value="$(arg joy_device)" />
+        <param name="deadzone" type="double" value="$(arg joy_deadzone)" />
+    </node>
+</launch>

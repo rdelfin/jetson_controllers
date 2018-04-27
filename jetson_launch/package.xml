@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>jetson_launch</name>
+  <version>0.0.0</version>
+  <description>The jetson_launch package</description>
+
+  <maintainer email="ricardo.delfin.garcia@gmail.com">Ricardo Delfin Garcia</maintainer>
+  <license>Apache 2.0</license>
+  <author email="ricardo.delfin.garcia@gmail.com">Ricardo Delfin Garcia</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>drive_train</exec_depend>
+  <exec_depend>pca9685_driver</exec_depend>
+  <exec_depend>joy</exec_depend>
+  <exec_depend>rplidar_ros</exec_depend>
+
+  <test_depend>roslaunch</test_depend>
+</package>

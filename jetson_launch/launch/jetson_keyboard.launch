@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find jetson_launch)/launch/includes/jetson.launch.xml" />
+    <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" launch-prefix="$(find jetson_launch)/scripts/tmux_run.bash" />
+</launch>

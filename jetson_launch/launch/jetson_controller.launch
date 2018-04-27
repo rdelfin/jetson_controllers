@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find jetson_launch)/launch/includes/jetson.launch.xml" />
+    <node name="joystick_converter" pkg="drive_train" type="joystick_converter" />
+</launch>
