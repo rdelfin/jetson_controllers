@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>drive_train</name>
+  <version>0.0.0</version>
+  <description>The drive_train package</description>
+  
+  <maintainer email="ricardo.delfin.garcia@gmail.com">Ricardo Delfin Garcia</maintainer>
+  <license>Apache 2.0</license>
+  <author email="ricardo.delfin.garcia@gmail.com">Ricardo Delfin Garcia</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>geometry_msgs</depend>
+  <depend>jetson_control_msgs</depend>
+  <depend>pca9685_driver</depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+
+  <export>
+
+  </export>
+</package>
