@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robot_model</name>
+  <version>0.0.0</version>
+  <description>The robot_model package</description>
+
+
+  <maintainer email="ricardo.delfin.garcia@gmail.com">Ricardo Delfin Garcia</maintainer>
+  <license>Apache 2.0</license>
+  <author email="ricardo.delfin.garcia@gmail.com">Ricardo Delfin Garcia</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+</package>

@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_base_transform" args="0 0.05 0 0 0 0 world base_link" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_base_transform" args="0 0.11 0 0 0 0 base_link laser" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_base_transform" args="0 0 0 0 0 0 map world" />
+</launch>
