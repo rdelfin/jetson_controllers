@@ -1,8 +1,8 @@
 <launch>
     <node name="pca9685_driver" pkg="pca9685_driver" type="pca9685_driver" />
     <node name="drive_train_controller" pkg="drive_train" type="drive_train_controller" />
-    <node name="base_laser_tf_node" pkg="drive_train" type="base_laser_tf_node" />
     <include file="$(find rplidar_ros)/launch/rplidar.launch">
+    <include file="$(find jetson_robot_model)/launch/static_transforms.launch" />
         <param name="frame_id" type="str" value="base_laser" />
     </include>
 </launch>
