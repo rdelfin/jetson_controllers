@@ -6,4 +6,6 @@
         <param name="dev" type="str" value="$(arg joy_device)" />
         <param name="deadzone" type="double" value="$(arg joy_deadzone)" />
     </node>
+
+    <include file="$(find jetson_launch)/launch/includes/gui.launch.xml" />
 </launch>

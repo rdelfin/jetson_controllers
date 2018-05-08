@@ -14,6 +14,7 @@
   <exec_depend>pca9685_driver</exec_depend>
   <exec_depend>joy</exec_depend>
   <exec_depend>rplidar_ros</exec_depend>
+  <exec_depend>rviz</exec_depend>
 
   <test_depend>roslaunch</test_depend>
 </package>
