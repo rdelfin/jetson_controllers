@@ -1,5 +1,6 @@
 <launch>
+    <!--                                                                              args="x y z yaw pitch roll parent child" -->
     <node pkg="tf2_ros" type="static_transform_publisher" name="world_base_transform" args="0 0 0.05 0 0 0 world base_link" />
-    <node pkg="tf2_ros" type="static_transform_publisher" name="base_laser_transform" args="0 0 0.11 0 0 0 base_link laser" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="base_laser_transform" args="0 0 0.11 -1.67 0 0 base_link laser" />
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_world_transform" args="0 0 0 0 0 0 map world" />
 </launch>
