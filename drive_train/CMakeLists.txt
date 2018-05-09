@@ -46,3 +46,9 @@ add_dependencies(dead_reckoning ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXP
 target_link_libraries(dead_reckoning
   ${catkin_LIBRARIES}
 )
+
+add_executable(speed_estimator src/speed_estimator.cpp)
+add_dependencies(speed_estimator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(speed_estimator
+  ${catkin_LIBRARIES}
+)
