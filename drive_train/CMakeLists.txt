@@ -5,18 +5,20 @@ add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
-  sensor_msgs
   jetson_control_msgs
+  nav_msgs
   pca9685_driver
   roscpp
   rospy
+  sensor_msgs
   tf2
+  tf2_geometry_msgs
   tf2_ros
 )
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS geometry_msgs sensor_msgs jetson_control_msgs pca9685_driver roscpp rospy tf2 tf2_ros
+  CATKIN_DEPENDS geometry_msgs jetson_control_msgs nav_msgs pca9685_driver roscpp rospy sensor_msgs tf2 tf2_geometry_msgs tf2_ros
 )
 
 ###########
@@ -36,5 +38,11 @@ target_link_libraries(drive_train_controller
 add_executable(joystick_converter src/joystick_converter.cpp)
 add_dependencies(joystick_converter ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(joystick_converter
+  ${catkin_LIBRARIES}
+)
+
+add_executable(dead_reckoning src/dead_reckoning.cpp)
+add_dependencies(dead_reckoning ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(dead_reckoning
   ${catkin_LIBRARIES}
 )
