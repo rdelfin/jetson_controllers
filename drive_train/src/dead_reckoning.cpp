@@ -38,10 +38,16 @@ void command_callback(const jetson_control_msgs::PCA9685Command::ConstPtr& msg) 
         // Speed value between 0 and 1
         double normalized_val = ((double)limit(msg->value, MIN_PWM, MAX_PWM) - (double)ZERO_PWM)/(double)(MAX_PWM - ZERO_PWM);
 
-        if(normalized_val >= 0) 
+        if(normalized_val >= 0) {
             speed = normalized_val*speed_factor - pos_speed_offset;
-        else
+            if(speed < 0)
+                speed = 0;
+        }
+        else {
             speed = normalized_val*speed_factor + neg_speed_offset;
+            if(speed > 0)
+                speed = 0;
+        }
     } else if(port == steering_port_num) {
         steering_set = true;
 
