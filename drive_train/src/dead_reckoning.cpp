@@ -20,7 +20,7 @@ inline T limit(T val, T min, T max) {
     return val;
 }
 
-double speed_factor, pos_speed_offset, neg_speed_offset, rot_factor;
+double speed_factor, pos_speed_offset, neg_speed_offset, rot_factor, rot_offset;
 int speed_port_num, steering_port_num;
 uint32_t frame;
 bool speed_set = false, steering_set = false;
@@ -51,13 +51,13 @@ void command_callback(const jetson_control_msgs::PCA9685Command::ConstPtr& msg) 
     } else if(port == steering_port_num) {
         steering_set = true;
 
-        direction = msg->value*rot_factor;
+        direction = msg->value*rot_factor + rot_offset;
     }
 }
 
 int main(int argc, char* argv[]) {
     ros::init(argc, argv, "dead_reckoning");
-    ros::NodeHandle nh;
+    ros::NodeHandle nh("~");
 
 
     nh.param<double>("speed_factor", speed_factor, 1);
