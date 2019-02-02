@@ -3,7 +3,7 @@
 #include <math.h>
 
  PCA9685::PCA9685(int address) {
-    kI2CBus = 0 ;           // Default I2C bus for Jetson TX2
+    kI2CBus = 1 ;           // Default I2C bus for Jetson TX2
     kI2CAddress = address ; // Defaults to 0x40 for PCA9685 ; jumper settable
     error = 0 ;
 }
