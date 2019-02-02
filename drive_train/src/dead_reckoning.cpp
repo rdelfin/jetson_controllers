@@ -20,7 +20,7 @@ inline T limit(T val, T min, T max) {
     return val;
 }
 
-double speed_factor, pos_speed_offset, neg_speed_offset, rot_factor;
+double speed_factor, pos_speed_offset, neg_speed_offset, rot_factor, rot_offset;
 int speed_port_num, steering_port_num;
 uint32_t frame;
 bool speed_set = false, steering_set = false;
@@ -38,26 +38,33 @@ void command_callback(const jetson_control_msgs::PCA9685Command::ConstPtr& msg) 
         // Speed value between 0 and 1
         double normalized_val = ((double)limit(msg->value, MIN_PWM, MAX_PWM) - (double)ZERO_PWM)/(double)(MAX_PWM - ZERO_PWM);
 
-        if(normalized_val >= 0) 
+        if(normalized_val >= 0) {
             speed = normalized_val*speed_factor - pos_speed_offset;
-        else
+            if(speed < 0)
+                speed = 0;
+        }
+        else {
             speed = normalized_val*speed_factor + neg_speed_offset;
+            if(speed > 0)
+                speed = 0;
+        }
     } else if(port == steering_port_num) {
         steering_set = true;
 
-        direction = msg->value*rot_factor;
+        direction = msg->value*rot_factor + rot_offset;
     }
 }
 
 int main(int argc, char* argv[]) {
     ros::init(argc, argv, "dead_reckoning");
-    ros::NodeHandle nh;
+    ros::NodeHandle nh("~");
 
 
     nh.param<double>("speed_factor", speed_factor, 1);
     nh.param<double>("pos_speed_offset", pos_speed_offset, 0);
     nh.param<double>("neg_speed_offset", neg_speed_offset, 0);
     nh.param<double>("rot_factor", rot_factor, 0);
+    nh.param<double>("rot_offset", rot_offset, 0);
 
     ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("odom", 50);
     ros::Subscriber sub = nh.subscribe("pca9685_commands", 50, command_callback);
