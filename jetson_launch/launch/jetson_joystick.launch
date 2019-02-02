@@ -1,5 +1,5 @@
 <launch>
-    <arg name="joy_device" default="/dev/input/js1" />
+    <arg name="joy_device" default="/dev/input/js0" />
     <arg name="joy_deadzone" default="0.00" />
 
     <node name="joystick" pkg="joy" type="joy_node">
