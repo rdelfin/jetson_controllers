@@ -26,7 +26,10 @@ SOFTWARE.
 #define _JHPWMPCA9685_H
 
 #include <cstddef>
-#include <linux/i2c-dev.h>
+extern "C" {
+    #include <linux/i2c-dev.h>
+    #include <i2c/smbus.h>
+}
 #include <sys/ioctl.h>
 #include <cstdlib>
 #include <cstdio>

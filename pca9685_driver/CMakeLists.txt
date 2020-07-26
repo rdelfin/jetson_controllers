@@ -27,5 +27,6 @@ add_executable(pca9685_driver src/pca9685_driver.cpp
                               src/JHPWMPCA9685.cpp)
 add_dependencies(pca9685_driver ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(pca9685_driver
+  i2c
   ${catkin_LIBRARIES}
 )
